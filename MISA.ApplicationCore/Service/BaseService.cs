@@ -46,7 +46,6 @@ namespace MISA.ApplicationCore.Service
                 data = -1
             };
         }
-
         public ActionServiceResult DeleteEntity(Guid entityId)
         {
 
@@ -71,9 +70,6 @@ namespace MISA.ApplicationCore.Service
                 data = result
             };
         }
-
-
-
         public virtual ActionServiceResult GetEntities(int pageIndex, int pageSize, string filter)
         {
 
@@ -93,7 +89,7 @@ namespace MISA.ApplicationCore.Service
         public ActionServiceResult GetEntityById(Guid entityId)
         {
             var param = new DynamicParameters();
-            param.Add("@Id", entityId.ToString());
+            param.Add("@CustomerId", entityId.ToString());
             var entity = _baseRepository.Get($"Proc_Get{_tableName}ById", param, commandType: CommandType.StoredProcedure);
             if (entity != null)
             {
@@ -116,8 +112,6 @@ namespace MISA.ApplicationCore.Service
                 };
             }
         }
-
-
         public virtual ActionServiceResult UpdateEntity(TEntity entity)
         {
             var param = this.MappingDataType(entity);
@@ -187,7 +181,6 @@ namespace MISA.ApplicationCore.Service
                         }
                     }
                 }
-
                 // Validate property theo độ dài
                 var propertieLength = property.GetCustomAttributes(typeof(Length), true);
                 if (propertieLength.Length > 0)
@@ -262,16 +255,12 @@ namespace MISA.ApplicationCore.Service
             }
             return param;
         }
-
-
         public ActionServiceResult SaveData(List<TEntity> entities)
         {
             if (entities?.Count > 0)
             {
                 PreSave(entities);
                 // Khai báo các list để chưa các entity có EditMode tương ứng
-                //List<TEntity> entityAdds = new List<TEntity>();
-                //List<TEntity> entityEdits = new List<TEntity>();
                 List<Guid> entityDelete = new List<Guid>();
                 // Lặp và gọi các hàm tương ứng tương ứng
                 foreach (var entity in entities)
@@ -289,6 +278,7 @@ namespace MISA.ApplicationCore.Service
                     }
                     else if (editMode == (int)EditMode.Edit)
                     {
+                  
                         return UpdateEntity(entity);
                     }
                 }
@@ -299,7 +289,6 @@ namespace MISA.ApplicationCore.Service
             }
             return new ActionServiceResult()
             {
-
             };
         }
         public bool GetData(int pageIndex, int pageSize, string filter)
@@ -314,7 +303,6 @@ namespace MISA.ApplicationCore.Service
         {
 
         }
-
         /// <summary>
         /// Hàm xóa nhiều bản ghi
         /// </summary>

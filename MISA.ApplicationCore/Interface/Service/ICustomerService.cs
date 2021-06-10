@@ -18,6 +18,6 @@ namespace MISA.ApplicationCore.Interface
         /// Lây data và lưu vào file excel
         /// </summary>
         /// <returns></returns>
-        ActionServiceResult ExportToExcel();
+        ActionServiceResult ExportToExcel(int pageIndex, int pageSize, string filter);
     }
 }

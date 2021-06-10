@@ -11,7 +11,8 @@ using System.Transactions;
 using System.Windows;
 using System;
 using System.Runtime.InteropServices;
-using Excel = Microsoft.Office.Interop.Excel;
+using System.IO;
+using OfficeOpenXml;
 
 namespace MISA.ApplicationCore
 {
@@ -19,7 +20,6 @@ namespace MISA.ApplicationCore
 
     {
         IBaseRepository<Customer> _baseRepository;
-
         #region Constructor
         public CustomerService(IBaseRepository<Customer> baseRepository) : base(baseRepository)
         {
@@ -66,47 +66,75 @@ namespace MISA.ApplicationCore
                         data = -1
                     };
                 }
-                else { 
+                else
+                {
                     return base.AddEntity(customer);
                 }
             }
         }
-
-
         public override ActionServiceResult UpdateEntity(Customer customer)
         {
-            var customerDuplicate = GetCustomerByCode(customer.CustomerCode);
-            if(customerDuplicate == null)
-            {
-                return base.UpdateEntity(customer);
-            }
-            else
+            var isValid = base.BaseValidate(customer);
+            if(isValid.Count > 0)
             {
                 return new ActionServiceResult()
                 {
                     Success = false,
                     MISAcode = Enumeration.MISAcode.Validate,
-                    Message = "Mã khách hàng đã tồn tại !!!",
+                    Message = "Sai định dạng !!!",
+                    FieldNotValids = isValid,
                     data = -1
                 };
             }
-            
+            else
+            {
+                // Kiểm tra có sửa mã khách hàng không
+                var customerOld = (List<Customer>) base.GetEntityById (customer.CustomerId).data;
+                var customerCodeOld = customerOld[0].CustomerCode;
+                if(customer.CustomerCode == customerCodeOld)
+                {
+                    return base.UpdateEntity(customer);
+                }
+                // Nếu có sửa mã thì check xem có bị trùng mã trong CSDL không
+                else 
+                {
+                    var customerNew = GetCustomerByCode(customer.CustomerCode);
+                    if(customerNew != null)
+                    return new ActionServiceResult()
+                    {
+                        Success = false,
+                        MISAcode = Enumeration.MISAcode.Validate,
+                        Message = "Mã khách hàng đã tồn tại !!!",
+                        data = -1
+                    };
+                    else
+                    {
+                        return base.UpdateEntity(customer);
+                    }
+                }
+               
+            }
+            return new ActionServiceResult()
+            {
+                Success = false,
+                MISAcode = Enumeration.MISAcode.Validate,
+                Message = "Mã khách hàng đã tồn tại !!!",
+                data = -1
+            };
+
         }
-
-     
-
         public Customer GetCustomerByCode(string customerCode)
         {
             var param = new DynamicParameters();
             param.Add("@customerCode", customerCode);
+          
             var customers = _baseRepository.Get($"Proc_GetCustomerByCode", param, commandType: CommandType.StoredProcedure).ToList();
-            if(customers.Count == 0)
+            if (customers.Count == 0)
             {
                 return null;
             }
             return customers[0];
         }
-
         public override ActionServiceResult GetEntities(int pageIndex, int pageSize, string filter)
         {
             if (filter == null || filter == string.Empty)
@@ -135,42 +163,13 @@ namespace MISA.ApplicationCore
             return base.GetEntities(pageIndex, pageSize, filter);
         }
 
-        public ActionServiceResult ExportToExcel()
+        public ActionServiceResult ExportToExcel(int pageIndex, int pageSize, string filter)
         {
-            Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
-
-            if (xlApp == null)
-            {
-                return null;
-            }
-
-
-            Excel.Workbook xlWorkBook;
-            Excel.Worksheet xlWorkSheet;
-            object misValue = System.Reflection.Missing.Value;
-
-            xlWorkBook = xlApp.Workbooks.Add(misValue);
-            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-
-            xlWorkSheet.Cells[1, 1] = "ID";
-            xlWorkSheet.Cells[1, 2] = "Name";
-            xlWorkSheet.Cells[2, 1] = "1";
-            xlWorkSheet.Cells[2, 2] = "One";
-            xlWorkSheet.Cells[3, 1] = "2";
-            xlWorkSheet.Cells[3, 2] = "Two";
-
-
-
-            xlWorkBook.SaveAs("C:\\Users\\lvdat\\Documents\\lvdat.xlsx", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
-            xlWorkBook.Close(true, misValue, misValue);
-            xlApp.Quit();
+            var listCustomer = base.GetEntities(pageIndex, pageSize, filter).data;
             return new ActionServiceResult()
             {
             };
         }
-
-
-
 
         #endregion
     }
