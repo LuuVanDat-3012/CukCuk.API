@@ -48,13 +48,30 @@ namespace MISA.ApplicationCore.Entity
         }
     }
     /// <summary>
-    /// Thời gian không nằm trong hkoangr cho phép 01-01-2001 đến 01-01-2021
+    /// Thời gian không nằm trong hkoangr cho phép 01-01-1900 đến 01-01-2021
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class ValidateTime : Attribute
     {
         public string Msg;
-        public ValidateTime(string msg)
+        public int StartYear;
+        public int EndYear;
+        public ValidateTime(string msg, int startDate, int endDate)
+        {
+            this.Msg = msg;
+            this.StartYear = startDate;
+            this.EndYear = endDate;
+        }
+    }
+
+    /// <summary>
+    /// Validate email
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property)]
+    public class ValidateEmail : Attribute
+    {
+        public string Msg;
+        public ValidateEmail(string msg)
         {
             this.Msg = msg;
         }

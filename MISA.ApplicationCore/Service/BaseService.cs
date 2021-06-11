@@ -221,15 +221,32 @@ namespace MISA.ApplicationCore.Service
                 {
                     var value = property.GetValue(entity);
                     var message = (propertyTime[0] as ValidateTime).Msg;
+                    var startYear = (propertyTime[0] as ValidateTime).StartYear;
+                    var endYear = (propertyTime[0] as ValidateTime).EndYear;
                     var propertyName = property.Name;
-                    var startDate = new DateTime(2001, 01, 01, 0, 0, 0);
-                    var endDate = new DateTime(2021, 01, 01, 0, 0, 0);
-                    if ((DateTime)value < startDate || (DateTime)value > endDate)
+                    if ((DateTime)value < new DateTime(startYear, 01, 01) || (DateTime)value > new DateTime(endYear, 01, 01))
                         fieldNotValids.Add(new FieldNotValid()
                         {
                             fieldName = propertyName,
                             msg = message
                         });
+                }
+                // Validate email
+                var propertyEmail = property.GetCustomAttributes(typeof(ValidateEmail), true);
+                if(propertyEmail.Length > 0)
+                {
+                    var value = property.GetValue(entity);
+                    var message = (propertyEmail[0] as ValidateEmail).Msg;
+                    var validEmail = IsValidEmail(value.ToString());
+                    var propertyName = property.Name;
+                    if (validEmail == false)
+                    {
+                        fieldNotValids.Add(new FieldNotValid()
+                        {
+                            fieldName = propertyName,
+                            msg = message
+                        });
+                    }
                 }
             }
             return fieldNotValids;
@@ -341,6 +358,18 @@ namespace MISA.ApplicationCore.Service
                     };
                 }
 
+            }
+        }
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
             }
         }
     }

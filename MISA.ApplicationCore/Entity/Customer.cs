@@ -37,7 +37,7 @@ namespace MISA.ApplicationCore.Entity
         /// Ngày sinh
         /// </summary>
         [Required("Ngày sinh không để trống")]
-        [ValidateTime("Ngày sinh không nằm trong khoảng giá trị cho phép (01/01/2001 - 01/01/2021)")]
+        [ValidateTime("Ngày sinh không nằm trong khoảng giá trị cho phép (01/01/1900 - 01/01/2021)", 1900, 2021)]
         public DateTime Birthday { get; set; }
         /// <summary>
         /// Số điện thoại
@@ -46,6 +46,7 @@ namespace MISA.ApplicationCore.Entity
         /// <summary>
         /// Địa chỉ email
         /// </summary>
+        [ValidateEmail("Email không đúng định dạng ")]
         public string Email { get; set; }
         /// <summary>
         /// MÃ nhóm khách hàng
@@ -60,11 +61,11 @@ namespace MISA.ApplicationCore.Entity
         /// </summary>
         public string Status { get; set; }
         /// <summary>
-        /// MÃ thẻ thành viên
+        /// Mã thẻ thành viên
         /// </summary>
         public string MemberCardCode { get; set; }
         /// <summary>
-        /// mã số thuế
+        /// Mã số thuế
         /// </summary>
         public string TaxCode { get; set; }
         /// <summary>
