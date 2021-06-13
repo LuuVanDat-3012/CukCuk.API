@@ -77,3 +77,15 @@ C:\Users\lvdat\Documents\misa.cukcuk.api\MISA.Infrastructure\obj\Debug\netcoreap
 C:\Users\lvdat\Documents\misa.cukcuk.api\MISA.Infrastructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.csproj.CopyComplete
 C:\Users\lvdat\Documents\misa.cukcuk.api\MISA.Infrastructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.dll
 C:\Users\lvdat\Documents\misa.cukcuk.api\MISA.Infrastructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.pdb
+C:\Users\Dat\Documents\eShop.API\MISA.Infrastructure\bin\Debug\netcoreapp3.1\MISA.Infrastructure.deps.json
+C:\Users\Dat\Documents\eShop.API\MISA.Infrastructure\bin\Debug\netcoreapp3.1\MISA.Infrastructure.dll
+C:\Users\Dat\Documents\eShop.API\MISA.Infrastructure\bin\Debug\netcoreapp3.1\MISA.Infrastructure.pdb
+C:\Users\Dat\Documents\eShop.API\MISA.Infrastructure\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.dll
+C:\Users\Dat\Documents\eShop.API\MISA.Infrastructure\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.pdb
+C:\Users\Dat\Documents\eShop.API\MISA.Infrastructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.csprojAssemblyReference.cache
+C:\Users\Dat\Documents\eShop.API\MISA.Infrastructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Dat\Documents\eShop.API\MISA.Infrastructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.AssemblyInfo.cs
+C:\Users\Dat\Documents\eShop.API\MISA.Infrastructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Dat\Documents\eShop.API\MISA.Infrastructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.csproj.CopyComplete
+C:\Users\Dat\Documents\eShop.API\MISA.Infrastructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.dll
+C:\Users\Dat\Documents\eShop.API\MISA.Infrastructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.pdb

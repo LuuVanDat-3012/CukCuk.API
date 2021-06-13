@@ -48,9 +48,9 @@ namespace MISA.ApplicationCore.Service
         }
         public ActionServiceResult DeleteEntity(Guid entityId)
         {
-
+            var paramName = "@" + _tableName + "Id";
             var param = new DynamicParameters();
-            param.Add("@Id", entityId.ToString());
+            param.Add(paramName, entityId.ToString());
             var result = _baseRepository.ExecuteNonQuery($"Proc_Delete{_tableName}", param, commandType: CommandType.StoredProcedure);
             if (result == 0)
             {
@@ -82,15 +82,16 @@ namespace MISA.ApplicationCore.Service
                 Message = "Thành công",
                 Success = true,
                 MISAcode = Enumeration.MISAcode.Success,
-                data = _baseRepository.Get($"Proc_Get{_tableName}Paging", param, commandType: CommandType.StoredProcedure)
+                data = _baseRepository.Get($"Proc_Get{_tableName}s", param, commandType: CommandType.StoredProcedure)
             };
         }
 
         public ActionServiceResult GetEntityById(Guid entityId)
         {
+            var paramName = "@" + _tableName + "Id";
             var param = new DynamicParameters();
-            param.Add("@CustomerId", entityId.ToString());
-            var entity = _baseRepository.Get($"Proc_Get{_tableName}ById", param, commandType: CommandType.StoredProcedure);
+            param.Add(paramName, entityId.ToString());
+            var entity = _baseRepository.Get($"Proc_Get{_tableName}By{_tableName}Id", param, commandType: CommandType.StoredProcedure);
             if (entity != null)
             {
                 return new ActionServiceResult()
@@ -157,8 +158,10 @@ namespace MISA.ApplicationCore.Service
                     var value = property.GetValue(entity);
                     var propertyTypeName = property.PropertyType.Name;
                     var propertyName = property.Name;
+                    // Kiểm tra với kiểu dữ liệu string
                     if (propertyTypeName.Equals("String"))
-                        if (value.ToString() == string.Empty || value == null)
+                    {
+                        if(value == null)
                         {
                             fieldNotValids.Add(new FieldNotValid()
                             {
@@ -166,7 +169,16 @@ namespace MISA.ApplicationCore.Service
                                 msg = message
                             });
                         }
-
+                        else if (value.ToString() == string.Empty || value.ToString() == null)
+                        {
+                            fieldNotValids.Add(new FieldNotValid()
+                            {
+                                fieldName = propertyName,
+                                msg = message
+                            });
+                        }
+                    }
+                    // Kiểm tra với kiểu dữ liệu datetime
                     if (propertyTypeName.Equals("DateTime"))
                     {
                         DateTime dateTime = default(DateTime);
@@ -178,6 +190,19 @@ namespace MISA.ApplicationCore.Service
                                 msg = message
                             });
 
+                        }
+                    }
+                    // Kiểm tra với kiểu dữ liệu Guid
+                    if (propertyTypeName.Equals("Guid"))
+                    {
+                        var defaultGuid = "00000000-0000-0000-0000-000000000000";
+                        if (value.ToString() == defaultGuid || value == null)
+                        {
+                            fieldNotValids.Add(new FieldNotValid()
+                            {
+                                fieldName = propertyName,
+                                msg = message
+                            });
                         }
                     }
                 }
@@ -233,7 +258,7 @@ namespace MISA.ApplicationCore.Service
                 }
                 // Validate email
                 var propertyEmail = property.GetCustomAttributes(typeof(ValidateEmail), true);
-                if(propertyEmail.Length > 0)
+                if (propertyEmail.Length > 0)
                 {
                     var value = property.GetValue(entity);
                     var message = (propertyEmail[0] as ValidateEmail).Msg;
@@ -295,7 +320,7 @@ namespace MISA.ApplicationCore.Service
                     }
                     else if (editMode == (int)EditMode.Edit)
                     {
-                  
+
                         return UpdateEntity(entity);
                     }
                 }

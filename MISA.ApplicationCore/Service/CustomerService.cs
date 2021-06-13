@@ -143,8 +143,8 @@ namespace MISA.ApplicationCore
             }
             // Lấy ra số lượng bản ghi
             var paramQuality = new DynamicParameters();
-            paramQuality.Add("@value", filter);
-            var quality = _baseRepository.GetQuality($"Proc_GetQuality{_tableName}", paramQuality, commandType: CommandType.StoredProcedure);
+            paramQuality.Add("@Filter", filter);
+            var quality = _baseRepository.GetDataPaging($"Proc_Data{_tableName}Paging", paramQuality, commandType: CommandType.StoredProcedure);
             // Lấy ra số trang
             var totalPage = Math.Ceiling(Convert.ToDouble(quality) / 30);
             var param = new DynamicParameters();

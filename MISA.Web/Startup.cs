@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MISA.ApplicationCore;
 using MISA.ApplicationCore.Interface;
+using MISA.ApplicationCore.Interface.Service;
 using MISA.ApplicationCore.Service;
 using MISA.Infrastructure;
 using System;
@@ -31,7 +32,7 @@ namespace MISA.service
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ICustomerService, CustomerService>();
-            services.AddScoped<ICustomerGroupService, CustomerGroupService>();
+            services.AddScoped<IStoreService, StoreService>();
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddControllers();

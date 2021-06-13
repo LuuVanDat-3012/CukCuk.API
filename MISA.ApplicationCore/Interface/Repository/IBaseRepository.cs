@@ -74,6 +74,6 @@ namespace MISA.ApplicationCore.Interface
         /// <param name="commandType">Kiểu command</param>
         /// <returns> Số bản ghi</returns>
         /// CreateBy: LVDat (07/06/2021)
-        int GetQuality(string sqlCommand, DynamicParameters param, CommandType commandType);
+        int GetDataPaging(string sqlCommand, DynamicParameters param, CommandType commandType);
     }
 }

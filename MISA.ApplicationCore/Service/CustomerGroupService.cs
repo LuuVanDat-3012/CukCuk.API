@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MISA.ApplicationCore.Service
 {
-    public class CustomerGroupService : BaseService<CustomerGroup>, ICustomerGroupService
+    public class CustomerGroupService : BaseService<CustomerGroup>
     {
         IBaseRepository<CustomerGroup> _baseRepository;
 

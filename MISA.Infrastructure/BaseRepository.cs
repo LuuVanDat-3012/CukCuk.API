@@ -41,7 +41,7 @@ namespace MISA.Infrastructure
             return _dbConnection.Query<TEntity>(sqlCommand, param, commandType: commandType);
         }
 
-        public int GetQuality(string sqlCommand, DynamicParameters param, CommandType commandType)
+        public int GetDataPaging(string sqlCommand, DynamicParameters param, CommandType commandType)
         {
             return Convert.ToInt32(_dbConnection.QueryFirst<int>(sqlCommand, param, commandType: commandType));
         }
