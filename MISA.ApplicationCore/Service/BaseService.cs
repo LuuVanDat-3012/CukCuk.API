@@ -72,17 +72,14 @@ namespace MISA.ApplicationCore.Service
         }
         public virtual ActionServiceResult GetEntities(int pageIndex, int pageSize, string filter)
         {
-
             var param = new DynamicParameters();
-            param.Add("@PageIndex", pageIndex);
-            param.Add("@PageSize", pageSize);
             param.Add("@Filter", filter);
             return new ActionServiceResult()
             {
                 Message = "Thành công",
                 Success = true,
                 MISAcode = Enumeration.MISAcode.Success,
-                data = _baseRepository.Get($"Proc_Get{_tableName}s", param, commandType: CommandType.StoredProcedure)
+                data = _baseRepository.Get($"Proc_Get{_tableName}s", null, commandType: CommandType.StoredProcedure)
             };
         }
 

@@ -15,11 +15,6 @@ namespace MISA.Web.Controllers
         {
             _customerService = customerService;
         }
-        [HttpGet("/export")]
-        public ActionServiceResult ExportToExcel([FromQuery] int pageIndex, [FromQuery] int pageSize, [FromQuery] string filter) {
-
-            return _customerService.ExportToExcel(pageIndex, pageSize, filter);
-        }
 
     }
     

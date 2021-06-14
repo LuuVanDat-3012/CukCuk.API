@@ -84,3 +84,12 @@ C:\Users\Dat\Documents\eShop.API\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MI
 C:\Users\Dat\Documents\eShop.API\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.deps.json
 C:\Users\Dat\Documents\eShop.API\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.dll
 C:\Users\Dat\Documents\eShop.API\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.pdb
+C:\Users\lvdat\Documents\CukCuk.API\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.deps.json
+C:\Users\lvdat\Documents\CukCuk.API\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.dll
+C:\Users\lvdat\Documents\CukCuk.API\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.pdb
+C:\Users\lvdat\Documents\CukCuk.API\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.csprojAssemblyReference.cache
+C:\Users\lvdat\Documents\CukCuk.API\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.AssemblyInfoInputs.cache
+C:\Users\lvdat\Documents\CukCuk.API\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.AssemblyInfo.cs
+C:\Users\lvdat\Documents\CukCuk.API\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.csproj.CoreCompileInputs.cache
+C:\Users\lvdat\Documents\CukCuk.API\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.dll
+C:\Users\lvdat\Documents\CukCuk.API\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.pdb
