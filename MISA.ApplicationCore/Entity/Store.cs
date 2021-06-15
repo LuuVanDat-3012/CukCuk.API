@@ -41,23 +41,18 @@ namespace MISA.ApplicationCore.Entity
         /// <summary>
         /// Mã quốc gia
         /// </summary>
-        [Required("Mã quốc gia không được để trống")]
-        public Guid CountryId { get; set; }
+        public Guid? CountryId { get; set; }
         /// <summary>
         /// Mã tỉnh/thành phố
-        /// </summary>
-        [Required("Mã tỉnh thành không được để trống")]
-        public Guid ProvinceId { get; set; }
+        public Guid? ProvinceId { get; set; }
         /// <summary>
         /// Mã quận/huyện
         /// </summary>
-        [Required("Mã quận/huyện không được để trống")]
-        public Guid DistrictId { get; set; }
+        public Guid? DistrictId { get; set; }
         /// <summary>
         /// Mã xã/phường
         /// </summary>
-        [Required("Mã xã/phường không được để trống")]
-        public Guid WardId { get; set; }
+        public Guid? WardId { get; set; }
         /// <summary>
         /// Phố
         /// </summary>

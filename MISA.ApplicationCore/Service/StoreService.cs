@@ -54,7 +54,7 @@ namespace MISA.ApplicationCore.Service
                     {
                         Success = false,
                         MISAcode = Enumeration.MISAcode.Validate,
-                        Message = "Mã khách hàng đã tồn tại !!!",
+                        Message = "Mã cửa hàng đã tồn tại trong hệ thống !!!",
                         data = -1
                     };
                 }
@@ -115,7 +115,7 @@ namespace MISA.ApplicationCore.Service
             else
             {
                 // Kiểm tra có sửa id  cửa hàng không
-                var storeOld = (List<Customer>)base.GetEntityById(store.StoreId).data;
+                var storeOld = (List<Store>)base.GetEntityById(store.StoreId).data;
                 if (storeOld?.Count == 0)
                 {
                     return new ActionServiceResult()
@@ -130,8 +130,8 @@ namespace MISA.ApplicationCore.Service
                 {
                     // Kiểm tra xem có sửa mã của sửa hàng không
                     // Nếu sửa thì check xem mã mới đã tồn tại chưa
-                    var customerCodeOld = storeOld[0].CustomerCode;
-                    if (store.StoreCode == customerCodeOld)
+                    var storeCodeOld = storeOld[0].StoreCode;
+                    if (store.StoreCode == storeCodeOld)
                     {
                         return base.UpdateEntity(store);
                     }
