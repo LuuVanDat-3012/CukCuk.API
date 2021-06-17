@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace MISA.Web.Controllers
 {
-    public class DistrictController: BaseEntitiesController<District>
+    public class DistrictsController: BaseEntitiesController<District>
     {
         IDistrictService _districtService;
-        public DistrictController(IDistrictService districtService): base(districtService)
+        public DistrictsController(IDistrictService districtService): base(districtService)
         {
             _districtService = districtService;
         }
-        [HttpGet("/Districts")]
+        [HttpGet("get/byProvince")]
         public IActionResult GetDistrict([FromQuery] Guid provinceId)
         {
             return Ok(_districtService.GetDistrictByProvince(provinceId));

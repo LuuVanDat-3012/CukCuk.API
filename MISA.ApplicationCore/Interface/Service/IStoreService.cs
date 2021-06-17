@@ -13,5 +13,8 @@ namespace MISA.ApplicationCore.Interface.Service
         /// <param name="storeCode">MÃ cửa hàng</param>
         /// <returns>1 cửa hàng được tìm thấy hoặc null</returns>
         Store GetStoreByStoreCode(string storeCode);
+
+        ActionServiceResult GetStoreByFilter( string storeCode,  string storeName,  string address,  string phoneNumber,  int status,
+             int pageIndex,  int pageSize);
     }
 }

@@ -170,6 +170,39 @@ namespace MISA.ApplicationCore.Service
             }
             return customers[0];
         }
+        /// <summary>
+        /// Hàm lấy ra danh sách store theo các tiêu chí
+        /// Lấy ra 1 danh sách các phần tử theo 1 dữ liệu filter đầu tiên
+        /// Sau đó lọc qua các filter còn lại 
+        /// </summary>
+        /// <param name="listFilter"></param>
+        /// <param name="listOption"></param>
+        /// <returns>1 danh sách store theo filter</returns>
+        public ActionServiceResult GetStoreByFilter(string storeCode, string storeName, string address, string phoneNumber, int status,
+             int pageIndex, int pageSize)
+        {
+            var param = new DynamicParameters();
+            param.Add("@StoreCode", storeCode);
+            param.Add("@StoreName", storeName);
+            param.Add("@Address", address);
+            param.Add("@PhoneNumber", phoneNumber);
+            param.Add("@Status", status);
+            param.Add("@PageIndex", pageIndex);
+            param.Add("@PageSize", pageSize);
+            var totalPage = _baseRepository.GetDataPaging($"Proc_GetDataStore", param, commandType: CommandType.StoredProcedure);
+            totalPage = (int)Math.Ceiling(Convert.ToDouble(totalPage / pageSize));
+      
+            var result = _baseRepository.Get($"Proc_GetStoreFilter", param, commandType: CommandType.StoredProcedure);
+            return new ActionServiceResult()
+            {
+                Success = true,
+                Message = "Lấy dữ liệu thành công !!!",
+                data = result,
+                TotalPage = totalPage
+
+
+            };
+        }
         #endregion
 
     }

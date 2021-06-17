@@ -20,7 +20,7 @@ namespace MISA.ApplicationCore.Service
 
             var param = new DynamicParameters();
             param.Add("@Id", provinceId.ToString());
-            var result = _baseRepository.Get("$Proc_GetDistrictwithProvince", param, commandType: System.Data.CommandType.StoredProcedure);
+            var result = _baseRepository.Get($"Proc_GetDistrictWithProvince", param, commandType: System.Data.CommandType.StoredProcedure);
             return new ActionServiceResult()
             {
                 Success = true,
