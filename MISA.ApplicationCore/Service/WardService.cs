@@ -25,7 +25,7 @@ namespace MISA.ApplicationCore.Service
                 Success = true,
                 Message = "Lấy dữ liệu thành công",
                 MISAcode = Enumeration.MISAcode.Success,
-                data = result
+                Data = result
             };
         }
     }

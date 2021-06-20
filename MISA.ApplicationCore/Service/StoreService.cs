@@ -41,7 +41,7 @@ namespace MISA.ApplicationCore.Service
                     MISAcode = Enumeration.MISAcode.Validate,
                     Message = "Không đúng định dạng !!",
                     FieldNotValids = fields,
-                    data = -1
+                    Data = -1
                 };
             }
             else
@@ -55,7 +55,7 @@ namespace MISA.ApplicationCore.Service
                         Success = false,
                         MISAcode = Enumeration.MISAcode.Validate,
                         Message = "Mã cửa hàng đã tồn tại trong hệ thống !!!",
-                        data = -1
+                        Data = -1
                     };
                 }
                 else
@@ -95,7 +95,7 @@ namespace MISA.ApplicationCore.Service
                 MISAcode = Enumeration.MISAcode.Success,
                 TotalPage = totalPage,
                 PageNum = pageIndex,
-                data = _baseRepository.Get($"Proc_GetStorePaging", param, commandType: CommandType.StoredProcedure)
+                Data = _baseRepository.Get($"Proc_GetStorePaging", param, commandType: CommandType.StoredProcedure)
             };
         }
         public override ActionServiceResult UpdateEntity(Store store)
@@ -109,13 +109,13 @@ namespace MISA.ApplicationCore.Service
                     MISAcode = Enumeration.MISAcode.Validate,
                     Message = "Sai định dạng !!!",
                     FieldNotValids = isValid,
-                    data = -1
+                    Data = -1
                 };
             }
             else
             {
                 // Kiểm tra có sửa id  cửa hàng không
-                var storeOld = (List<Store>)base.GetEntityById(store.StoreId).data;
+                var storeOld = (List<Store>)base.GetEntityById(store.StoreId).Data;
                 if (storeOld?.Count == 0)
                 {
                     return new ActionServiceResult()
@@ -123,7 +123,7 @@ namespace MISA.ApplicationCore.Service
                         Success = false,
                         MISAcode = Enumeration.MISAcode.Validate,
                         Message = "Id của cửa hàng không tồn tại trong hệ thống !!!",
-                        data = -1
+                        Data = -1
                     };
                 }
                 else
@@ -145,7 +145,7 @@ namespace MISA.ApplicationCore.Service
                                 Success = false,
                                 MISAcode = Enumeration.MISAcode.Validate,
                                 Message = "Mã cửa hàng đã tồn tại trong hệ thống !!!",
-                                data = -1
+                                Data = -1
                             };
                     }
                 }
@@ -178,9 +178,13 @@ namespace MISA.ApplicationCore.Service
         /// <param name="listFilter"></param>
         /// <param name="listOption"></param>
         /// <returns>1 danh sách store theo filter</returns>
-        public ActionServiceResult GetStoreByFilter(string storeCode, string storeName, string address, string phoneNumber, int status,
+        public ActionServiceResult GetStoreByFilter(string storeCode, string storeName, string address, string phoneNumber, int? status,
              int pageIndex, int pageSize)
-        {
+        { 
+            if(status == 3)
+            {
+                status = null;
+            }
             var param = new DynamicParameters();
             param.Add("@StoreCode", storeCode);
             param.Add("@StoreName", storeName);
@@ -189,19 +193,24 @@ namespace MISA.ApplicationCore.Service
             param.Add("@Status", status);
             param.Add("@PageIndex", pageIndex);
             param.Add("@PageSize", pageSize);
-            var totalPage = _baseRepository.GetDataPaging($"Proc_GetDataStore", param, commandType: CommandType.StoredProcedure);
-            totalPage = (int)Math.Ceiling(Convert.ToDouble(totalPage / pageSize));
+            var totalRecord = _baseRepository.GetDataPaging($"Proc_GetDataStore", param, commandType: CommandType.StoredProcedure);
+            var totalPage = (int)Math.Ceiling(Convert.ToDouble(totalRecord / pageSize)) + 1;
       
             var result = _baseRepository.Get($"Proc_GetStoreFilter", param, commandType: CommandType.StoredProcedure);
             return new ActionServiceResult()
             {
                 Success = true,
                 Message = "Lấy dữ liệu thành công !!!",
-                data = result,
+                Data = result,
+                TotalRecord = totalRecord,
                 TotalPage = totalPage
-
-
             };
+        }
+
+        public ActionServiceResult GetStoreFilter(ObjectFilter objectFilter)
+        {
+            var param = new DynamicParameters();
+            return null;
         }
         #endregion
 

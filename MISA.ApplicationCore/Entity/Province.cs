@@ -8,7 +8,7 @@ namespace MISA.ApplicationCore.Entity
     /// Lớp mô tả thông tin tỉnh thành
     /// </summary>
     /// CreateBy: LVDat (11/6/2021)
-    public class Province
+    public class Province: BaseEntity
     {
         /// <summary>
         /// Mã tỉnh thành

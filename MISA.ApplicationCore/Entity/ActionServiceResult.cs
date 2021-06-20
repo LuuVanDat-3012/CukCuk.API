@@ -12,8 +12,9 @@ namespace MISA.ApplicationCore.Entity
         public string Message { get; set; }
         public MISAcode MISAcode { get; set; }
         public List<FieldNotValid> FieldNotValids { get; set; } = new List<FieldNotValid>();
-        public object data { get; set; }
+        public object Data { get; set; }
         public object TotalPage { get; set; }
         public int PageNum { get; set; }
+        public int TotalRecord { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace MISA.ApplicationCore.Service
                     Success = true,
                     MISAcode = MISAcode.Success,
                     Message = "Thêm mới thành công !!!",
-                    data = result
+                    Data = result
                 };
             }
             return new ActionServiceResult()
@@ -43,7 +43,7 @@ namespace MISA.ApplicationCore.Service
                 MISAcode = MISAcode.Validate,
                 Message = "Thêm mới không thành công !!!",
                 FieldNotValids = isValidate,
-                data = -1
+                Data = -1
             };
         }
         public ActionServiceResult DeleteEntity(Guid entityId)
@@ -59,7 +59,7 @@ namespace MISA.ApplicationCore.Service
                     Success = false,
                     MISAcode = MISAcode.Validate,
                     Message = "Không tìm thấy  bản ghi cần xoá !!!",
-                    data = 0
+                    Data = 0
                 };
             }
             return new ActionServiceResult()
@@ -67,7 +67,7 @@ namespace MISA.ApplicationCore.Service
                 Success = true,
                 MISAcode = MISAcode.Validate,
                 Message = "Xoá thành công !!!",
-                data = result
+                Data = result
             };
         }
         public virtual ActionServiceResult GetEntities(int pageIndex, int pageSize, string filter)
@@ -79,7 +79,7 @@ namespace MISA.ApplicationCore.Service
                 Message = "Thành công",
                 Success = true,
                 MISAcode = Enumeration.MISAcode.Success,
-                data = _baseRepository.Get($"Proc_Get{_tableName}s", null, commandType: CommandType.StoredProcedure)
+                Data = _baseRepository.Get($"Proc_Get{_tableName}s", null, commandType: CommandType.StoredProcedure)
             };
         }
 
@@ -96,7 +96,7 @@ namespace MISA.ApplicationCore.Service
                     Message = "Thành công",
                     Success = true,
                     MISAcode = Enumeration.MISAcode.Success,
-                    data = entity
+                    Data = entity
                 };
             }
             else
@@ -106,7 +106,7 @@ namespace MISA.ApplicationCore.Service
                     Message = "Không tìm thấy",
                     Success = true,
                     MISAcode = Enumeration.MISAcode.Howllow,
-                    data = null
+                    Data = null
                 };
             }
         }
@@ -122,7 +122,7 @@ namespace MISA.ApplicationCore.Service
                     Message = "Cập nhật bản ghi thành công !!!",
                     Success = true,
                     MISAcode = Enumeration.MISAcode.Success,
-                    data = result
+                    Data = result
                 };
             }
             return new ActionServiceResult()
@@ -131,7 +131,7 @@ namespace MISA.ApplicationCore.Service
                 Success = false,
                 MISAcode = Enumeration.MISAcode.Validate,
                 FieldNotValids = isValid,
-                data = null
+                Data = null
             };
         }
         /// <summary>
@@ -355,7 +355,7 @@ namespace MISA.ApplicationCore.Service
                 foreach (Guid id in listId)
                 {
                     var result = this.DeleteEntity(id);
-                    affectedRows += (int)result.data;
+                    affectedRows += (int)result.Data;
                 }
                 if (affectedRows == listId.Length)
                 {
@@ -365,7 +365,7 @@ namespace MISA.ApplicationCore.Service
                         Success = true,
                         Message = "Xoá thành công !!!",
                         MISAcode = Enumeration.MISAcode.Success,
-                        data = affectedRows
+                        Data = affectedRows
                     };
                 }
                 else
@@ -376,7 +376,7 @@ namespace MISA.ApplicationCore.Service
                         Success = true,
                         Message = "Xóa không thành công !!!",
                         MISAcode = Enumeration.MISAcode.Success,
-                        data = 0
+                        Data = 0
                     };
                 }
 

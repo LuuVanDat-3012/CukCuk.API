@@ -53,5 +53,10 @@ namespace MISA.ApplicationCore.Entity
             InActive = 0,
             Active = 1
         }
+
+        public enum OptionFilter
+        {
+
+        }
     }
 }
