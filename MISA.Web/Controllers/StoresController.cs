@@ -16,19 +16,18 @@ namespace MISA.Web.Controllers
         {
             _storeService = storeService;
         }
-        [HttpGet("filter")]
-        public IActionResult GetStoreByFilter([FromQuery] string storeCode, [FromQuery] string storeName, [FromQuery] string address, [FromQuery] string phoneNumber, [FromQuery] int status,
-            [FromQuery] int pageIndex, [FromQuery] int pageSize)
-        {
-           var result = _storeService.GetStoreByFilter(storeCode, storeName, address, phoneNumber, status,
-              pageIndex, pageSize);
-            return Ok(result);
-        }
 
+        /// <summary>
+        /// Lấy danh sách cửa hàng theo Filter 
+        /// </summary>
+        /// <param name="objectFilter">Filter</param>
+        /// <returns>! danh sách cửa hàng</returns>
+        /// CreatedBy: Lưu Văn Đạt(15/06/2021)
         [HttpPost("Filter")]
         public IActionResult GetStoreFilter([FromBody] ObjectFilter objectFilter)
         {
-            return null;
+            var result = _storeService.GetStoreFilter(objectFilter);
+            return Ok(result);
         }
     }
 }

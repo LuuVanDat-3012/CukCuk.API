@@ -20,6 +20,7 @@ namespace MISA.ApplicationCore.Service
             _tableName = typeof(TEntity).Name;
         }
         #endregion
+        #region Method
         public virtual ActionServiceResult AddEntity(TEntity entity)
         {
             ActionServiceResult actionServiceResult = new ActionServiceResult();
@@ -110,9 +111,10 @@ namespace MISA.ApplicationCore.Service
                 };
             }
         }
+
         public virtual ActionServiceResult UpdateEntity(TEntity entity)
         {
-            var param = this.MappingDataType(entity);
+            var param = MappingDataType(entity);
             var isValid = BaseValidate(entity);
             if (isValid.Count == 0)
             {
@@ -305,19 +307,21 @@ namespace MISA.ApplicationCore.Service
                 foreach (var entity in entities)
                 {
                     var oEditMode = entity.GetType().GetProperty("EditMode").GetValue(entity);
+                    // Nếu editMode  = 1 (Thêm) gọi vào hàm thêm
                     var editMode = Convert.ToInt32(oEditMode);
                     if (editMode == (int)EditMode.Add)
                     {
                         return AddEntity(entity);
                     }
+                    // Nếu editMode  = 4 (Xóa) gọi vào hàm xóa
                     else if (editMode == (int)EditMode.Delete)
                     {
                         var entityId = entity.GetType().GetProperty(_tableName + "Id").GetValue(entity);
                         entityDelete.Add((Guid)entityId);
                     }
+                    // Nếu editMode  = 3 (Thêm) gọi vào hàm sửa
                     else if (editMode == (int)EditMode.Edit)
                     {
-
                         return UpdateEntity(entity);
                     }
                 }
@@ -382,6 +386,12 @@ namespace MISA.ApplicationCore.Service
 
             }
         }
+        /// <summary>
+        /// Hàm validate email
+        /// </summary>
+        /// <param name="email">Email cần validae</param>
+        /// <returns>bool</returns>
+        /// CreatedBy: LVDat(16/9/2021)
         private bool IsValidEmail(string email)
         {
             try
@@ -394,6 +404,7 @@ namespace MISA.ApplicationCore.Service
                 return false;
             }
         }
+        #endregion
     }
 }
 

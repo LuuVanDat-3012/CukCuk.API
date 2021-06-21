@@ -19,7 +19,7 @@ namespace MISA.ApplicationCore.Entity
         /// <summary>
         /// Trạng thái tìm kiếm của thuộc tính mã cửa hàng
         /// </summary>
-        public int OptionCode { get; set; }
+        public int? OptionCode { get; set; }
         /// <summary>
         /// Mã cửa hàng cần tìm kiếm
         /// </summary>
@@ -27,7 +27,7 @@ namespace MISA.ApplicationCore.Entity
         /// <summary>
         /// Trạng thái tìm kiếm của tên cửa hàng
         /// </summary>
-        public int OptionName { get; set; }
+        public int? OptionName { get; set; }
         /// <summary>
         /// Tên cửa hàng cần timd kiếm
         /// </summary>
@@ -35,7 +35,7 @@ namespace MISA.ApplicationCore.Entity
         /// <summary>
         /// Trạng thái tìm kiếm theo địa chỉ
         /// </summary>
-        public int OptionAddress{ get; set; }
+        public int? OptionAddress{ get; set; }
         /// <summary>
         /// Địa chỉ cần tìm kiếm
         /// </summary>
@@ -43,22 +43,22 @@ namespace MISA.ApplicationCore.Entity
         /// <summary>
         /// Trạng thái tìm kiếm của thuộc tính mã cửa hàng
         /// </summary>
-        public string OptionPhone { get; set; }
+        public int? OptionPhone { get; set; }
         /// <summary>
         /// Số điện thại cần tìm kiếm
         /// </summary>
-        public int FilterPhone { get; set; }
+        public string FilterPhone { get; set; }
         /// <summary>
         /// Trạng thái của cửa ahgnf
         /// </summary>
-        public int FilterStatus { get; set; }
+        public int? FilterStatus { get; set; }
         /// <summary>
         /// Vị trí trang
         /// </summary>
-        public int PageIndex { get; set; }
+        public int? PageIndex { get; set; }
         /// <summary>
         /// Số bản ghi trên 1 trang
         /// </summary>
-        public int PageSize { get; set; }
+        public int? PageSize { get; set; }
     }
 }

@@ -20,12 +20,25 @@ namespace MISA.Web.Controllers
             _baseService = baseService;
         }
         // GET: api/<BaseEntitiesController>
+        /// <summary>
+        /// Lấy danh sách các đói tượng
+        /// </summary>
+        /// <param name="pageIndex">Trang hiện tại</param>
+        /// <param name="pageSize">Số bản ghi/ trang</param>
+        /// <param name="filter">Điều kiện</param>
+        /// <returns>Danh sách bản ghi</returns>
+        /// CreatedBy: Lưu Văn Đạt(15/06/2021)
         [HttpGet]
         public IActionResult Get([FromQuery] int pageIndex,[FromQuery] int pageSize, [FromQuery] string filter)
         {
             return Ok(_baseService.GetEntities(pageIndex, pageSize, filter));
         }
-
+        /// <summary>
+        /// Lấy đối tượng theo id
+        /// </summary>
+        /// <param name="id">Id của đối tượng</param>
+        /// <returns>! ddooois tượng</returns>
+        /// CreatedBy: Lưu Văn Đạt(15/06/2021)
         // GET api/<BaseEntitiesController>/5
         [HttpGet("{id}")]
         public IActionResult Get(string id)
@@ -33,6 +46,12 @@ namespace MISA.Web.Controllers
             return Ok(_baseService.GetEntityById(Guid.Parse(id)));
         }
 
+        /// <summary>
+        /// Thêm, xóa, sửa theo edirMode truyền vào
+        /// </summary>
+        /// <param name="entities">Đối tượng cần thao tác</param>
+        /// <returns>Số bản ghi bị ảnh hưởng</returns>
+        ///  CreatedBy: Lưu Văn Đạt(15/06/2021)
         // POST api/<BaseEntitiesController>
         [HttpPost]
         public IActionResult Post([FromBody] List<TEntity> entities)

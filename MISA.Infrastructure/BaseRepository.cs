@@ -46,7 +46,6 @@ namespace MISA.Infrastructure
             return Convert.ToInt32(_dbConnection.QueryFirst<int>(sqlCommand, param, commandType: commandType));
         }
 
-
         #endregion
     }
 }

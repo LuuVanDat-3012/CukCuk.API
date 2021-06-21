@@ -65,41 +65,13 @@ namespace MISA.ApplicationCore.Service
             }
         }
         /// <summary>
-        /// Phân trang danh sách cửa hàng
+        /// Hàm sửa thông tin 1 sửa hàng
         /// </summary>
-        /// <param name="pageIndex">Ví trí trang</param>
-        /// <param name="pageSize">Số bản ghi/trang</param>
-        /// <param name="filter">Thông tin tìm kiếm (nếu có)</param>
-        /// <returns>Danh sách cửa hàng</returns>
-        /// CreatedBy: LVDat (12/06/2021)
-        public override ActionServiceResult GetEntities(int pageIndex, int pageSize, string filter)
-        {
-            if (filter == null || filter == string.Empty)
-            {
-                filter = "";
-            }
-            // Lấy ra số lượng bản ghi
-            var paramQuality = new DynamicParameters();
-            paramQuality.Add("@Filter", filter);
-            var quality = _baseRepository.GetDataPaging($"Proc_GetData{_tableName}Paging", paramQuality, commandType: CommandType.StoredProcedure);
-            // Lấy ra số trang
-            var totalPage = Math.Ceiling(Convert.ToDouble(quality) / 30);
-            var param = new DynamicParameters();
-            param.Add("@PageIndex", pageIndex);
-            param.Add("@PageSize", pageSize);
-            param.Add("@Filter", filter);
-            return new ActionServiceResult()
-            {
-                Message = "Lấy dữ liệu thành công",
-                Success = true,
-                MISAcode = Enumeration.MISAcode.Success,
-                TotalPage = totalPage,
-                PageNum = pageIndex,
-                Data = _baseRepository.Get($"Proc_GetStorePaging", param, commandType: CommandType.StoredProcedure)
-            };
-        }
+        /// <param name="store">Cửa hàng cần sửa</param>
+        /// <returns> Số dòng bị ảnh hưởng</returns>
         public override ActionServiceResult UpdateEntity(Store store)
         {
+            // Kiểm tra validate hợp lệ chưa
             var isValid = base.BaseValidate(store);
             if (isValid.Count > 0)
             {
@@ -170,47 +142,23 @@ namespace MISA.ApplicationCore.Service
             }
             return customers[0];
         }
-        /// <summary>
-        /// Hàm lấy ra danh sách store theo các tiêu chí
-        /// Lấy ra 1 danh sách các phần tử theo 1 dữ liệu filter đầu tiên
-        /// Sau đó lọc qua các filter còn lại 
-        /// </summary>
-        /// <param name="listFilter"></param>
-        /// <param name="listOption"></param>
-        /// <returns>1 danh sách store theo filter</returns>
-        public ActionServiceResult GetStoreByFilter(string storeCode, string storeName, string address, string phoneNumber, int? status,
-             int pageIndex, int pageSize)
-        { 
-            if(status == 3)
-            {
-                status = null;
-            }
-            var param = new DynamicParameters();
-            param.Add("@StoreCode", storeCode);
-            param.Add("@StoreName", storeName);
-            param.Add("@Address", address);
-            param.Add("@PhoneNumber", phoneNumber);
-            param.Add("@Status", status);
-            param.Add("@PageIndex", pageIndex);
-            param.Add("@PageSize", pageSize);
-            var totalRecord = _baseRepository.GetDataPaging($"Proc_GetDataStore", param, commandType: CommandType.StoredProcedure);
-            var totalPage = (int)Math.Ceiling(Convert.ToDouble(totalRecord / pageSize)) + 1;
-      
-            var result = _baseRepository.Get($"Proc_GetStoreFilter", param, commandType: CommandType.StoredProcedure);
+        public ActionServiceResult GetStoreFilter(ObjectFilter objectFilter)
+        {
+            var param = this.MappingDataType<ObjectFilter>(objectFilter);
+            param.Add("TotalRecord", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            var result = _baseRepository.Get($"Proc_FilterStore", param, commandType: CommandType.StoredProcedure);
+            var totalRecord = param.Get<int>("TotalRecord");
+            var toltalPage = (int)Math.Ceiling(Convert.ToDouble(totalRecord / objectFilter.PageSize)) + 1 ;
             return new ActionServiceResult()
             {
                 Success = true,
+                MISAcode = Enumeration.MISAcode.Success,
                 Message = "Lấy dữ liệu thành công !!!",
                 Data = result,
-                TotalRecord = totalRecord,
-                TotalPage = totalPage
+                TotalPage = toltalPage,
+                TotalRecord = totalRecord
             };
-        }
 
-        public ActionServiceResult GetStoreFilter(ObjectFilter objectFilter)
-        {
-            var param = new DynamicParameters();
-            return null;
         }
         #endregion
 
