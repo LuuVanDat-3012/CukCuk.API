@@ -54,9 +54,21 @@ namespace MISA.ApplicationCore.Entity
             Active = 1
         }
 
+        /// <summary>
+        /// Trạng thái tìm kiếm
+        /// 1: Chứa
+        /// 2: Bằng
+        /// 3: Bắt đầu bằng
+        /// 4: Kết thúc bằng
+        /// 5: Không chứa
+        /// </summary>
         public enum OptionFilter
         {
-
+            Contain = 1,
+            Equal = 2,
+            StartWith = 3,
+            EndWith = 4,
+            NoContain = 5
         }
     }
 }

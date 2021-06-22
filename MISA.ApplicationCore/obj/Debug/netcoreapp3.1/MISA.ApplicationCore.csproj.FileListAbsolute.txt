@@ -111,3 +111,5 @@ C:\Users\lvdat\Documents\misa.eshop.api\MISA.ApplicationCore\obj\Debug\netcoreap
 C:\Users\lvdat\Documents\misa.eshop.api\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.csproj.CoreCompileInputs.cache
 C:\Users\lvdat\Documents\misa.eshop.api\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.dll
 C:\Users\lvdat\Documents\misa.eshop.api\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.pdb
+C:\Users\Dat\Documents\misa.eshop.api\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.Properties.Resources.resources
+C:\Users\Dat\Documents\misa.eshop.api\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.csproj.GenerateResource.cache

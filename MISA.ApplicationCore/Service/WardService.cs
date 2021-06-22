@@ -23,7 +23,7 @@ namespace MISA.ApplicationCore.Service
             return new ActionServiceResult()
             {
                 Success = true,
-                Message = "Lấy dữ liệu thành công",
+                Message = ApplicationCore.Properties.Resources.getSuccess,
                 MISAcode = Enumeration.MISAcode.Success,
                 Data = result
             };

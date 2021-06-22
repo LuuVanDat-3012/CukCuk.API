@@ -4,6 +4,8 @@ using MISA.ApplicationCore.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection;
+using System.Resources;
 using System.Transactions;
 using static MISA.ApplicationCore.Entity.Enumeration;
 
@@ -13,6 +15,7 @@ namespace MISA.ApplicationCore.Service
     {
         IBaseRepository<TEntity> _baseRepository;
         protected string _tableName;
+
         #region Constructor
         public BaseService(IBaseRepository<TEntity> baseRepository)
         {
@@ -34,7 +37,7 @@ namespace MISA.ApplicationCore.Service
                 {
                     Success = true,
                     MISAcode = MISAcode.Success,
-                    Message = "Thêm mới thành công !!!",
+                    Message = ApplicationCore.Properties.Resources.addSuccess,
                     Data = result
                 };
             }
@@ -42,7 +45,7 @@ namespace MISA.ApplicationCore.Service
             {
                 Success = false,
                 MISAcode = MISAcode.Validate,
-                Message = "Thêm mới không thành công !!!",
+                Message = ApplicationCore.Properties.Resources.validateError,
                 FieldNotValids = isValidate,
                 Data = -1
             };
@@ -59,7 +62,7 @@ namespace MISA.ApplicationCore.Service
                 {
                     Success = false,
                     MISAcode = MISAcode.Validate,
-                    Message = "Không tìm thấy  bản ghi cần xoá !!!",
+                    Message = ApplicationCore.Properties.Resources.recordNotFound,
                     Data = 0
                 };
             }
@@ -67,7 +70,7 @@ namespace MISA.ApplicationCore.Service
             {
                 Success = true,
                 MISAcode = MISAcode.Validate,
-                Message = "Xoá thành công !!!",
+                Message = ApplicationCore.Properties.Resources.deleteSuccess,
                 Data = result
             };
         }
@@ -77,7 +80,7 @@ namespace MISA.ApplicationCore.Service
             param.Add("@Filter", filter);
             return new ActionServiceResult()
             {
-                Message = "Thành công",
+                Message = ApplicationCore.Properties.Resources.getSuccess,
                 Success = true,
                 MISAcode = Enumeration.MISAcode.Success,
                 Data = _baseRepository.Get($"Proc_Get{_tableName}s", null, commandType: CommandType.StoredProcedure)
@@ -94,7 +97,7 @@ namespace MISA.ApplicationCore.Service
             {
                 return new ActionServiceResult()
                 {
-                    Message = "Thành công",
+                    Message = ApplicationCore.Properties.Resources.getSuccess,
                     Success = true,
                     MISAcode = Enumeration.MISAcode.Success,
                     Data = entity
@@ -104,7 +107,7 @@ namespace MISA.ApplicationCore.Service
             {
                 return new ActionServiceResult()
                 {
-                    Message = "Không tìm thấy",
+                    Message = ApplicationCore.Properties.Resources.notFound,
                     Success = true,
                     MISAcode = Enumeration.MISAcode.Howllow,
                     Data = null
@@ -121,7 +124,7 @@ namespace MISA.ApplicationCore.Service
                 var result = _baseRepository.ExecuteNonQuery($"Proc_Update{_tableName}", param, CommandType.StoredProcedure);
                 return new ActionServiceResult()
                 {
-                    Message = "Cập nhật bản ghi thành công !!!",
+                    Message = ApplicationCore.Properties.Resources.updateSuccess,
                     Success = true,
                     MISAcode = Enumeration.MISAcode.Success,
                     Data = result
@@ -129,8 +132,7 @@ namespace MISA.ApplicationCore.Service
             }
             return new ActionServiceResult()
             {
-                Message = "Cập nhật bản ghi không  thành công !!!",
-                Success = false,
+                Message = ApplicationCore.Properties.Resources.updateNotSuscess,
                 MISAcode = Enumeration.MISAcode.Validate,
                 FieldNotValids = isValid,
                 Data = null

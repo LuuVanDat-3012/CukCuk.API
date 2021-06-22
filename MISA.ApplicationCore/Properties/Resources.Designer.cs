@@ -61,6 +61,24 @@ namespace MISA.ApplicationCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thêm mới không thành công.
+        /// </summary>
+        internal static string addNotSuccess {
+            get {
+                return ResourceManager.GetString("addNotSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thêm mới thành công.
+        /// </summary>
+        internal static string addSuccess {
+            get {
+                return ResourceManager.GetString("addSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mã cửa hàng không vượt quá 20 ký tự.
         /// </summary>
         internal static string beyondLengthStoreCode {
@@ -79,11 +97,56 @@ namespace MISA.ApplicationCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Xoá không thành công.
+        /// </summary>
+        internal static string deleteNotSuccess {
+            get {
+                return ResourceManager.GetString("deleteNotSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xoá dữ liệu thành công.
+        /// </summary>
+        internal static string deleteSuccess {
+            get {
+                return ResourceManager.GetString("deleteSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mã cửa hàng đã tồn tại. Vui lòng kiểm tra lại.
         /// </summary>
         internal static string duplicateStoreCode {
             get {
                 return ResourceManager.GetString("duplicateStoreCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lấy dữ liệu thành công.
+        /// </summary>
+        internal static string getSuccess {
+            get {
+                return ResourceManager.GetString("getSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Không tìm thấy.
+        /// </summary>
+        internal static string notFound {
+            get {
+                return ResourceManager.GetString("notFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bản ghi không tồn tại.
+        /// </summary>
+        internal static string recordNotFound {
+            get {
+                return ResourceManager.GetString("recordNotFound", resourceCulture);
             }
         }
         
@@ -111,6 +174,42 @@ namespace MISA.ApplicationCore.Properties {
         internal static string requiredStoreName {
             get {
                 return ResourceManager.GetString("requiredStoreName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id không tồn tại trong hệ thống.
+        /// </summary>
+        internal static string storeIdNotFound {
+            get {
+                return ResourceManager.GetString("storeIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sửa không thành công.
+        /// </summary>
+        internal static string updateNotSuscess {
+            get {
+                return ResourceManager.GetString("updateNotSuscess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sửa thành công.
+        /// </summary>
+        internal static string updateSuccess {
+            get {
+                return ResourceManager.GetString("updateSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sai định dạng.
+        /// </summary>
+        internal static string validateError {
+            get {
+                return ResourceManager.GetString("validateError", resourceCulture);
             }
         }
     }
