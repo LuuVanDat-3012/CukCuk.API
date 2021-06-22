@@ -137,7 +137,6 @@
   </data>
   <data name="duplicateStoreCode" xml:space="preserve">
     <value>Mã cửa hàng đã tồn tại. Vui lòng kiểm tra lại</value>
-    <comment>Thông báo khi trùng mã</comment>
   </data>
   <data name="getSuccess" xml:space="preserve">
     <value>Lấy dữ liệu thành công</value>

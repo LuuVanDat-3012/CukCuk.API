@@ -50,7 +50,7 @@ namespace MISA.ApplicationCore.Entity
         /// CreatedBy: LVDat (11/06/2021)
         public enum StoreStatus
         {
-            InActive = 0,
+            DeActive = 0,
             Active = 1
         }
 
