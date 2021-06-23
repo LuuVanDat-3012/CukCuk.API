@@ -19,6 +19,7 @@ namespace MISA.ApplicationCore.Entity
         /// Mã cửa hàng
         /// </summary>
         [Required("Mã cửa hàng không được để trống")]
+        [Length("Mã cửa hàng không vượt quá 25 ký tự", 25)]
         public string StoreCode { get; set; }
         /// <summary>
         /// Tên sửa hàng

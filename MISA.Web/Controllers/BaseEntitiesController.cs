@@ -47,7 +47,7 @@ namespace MISA.Web.Controllers
         }
 
         /// <summary>
-        /// Thêm, xóa, sửa theo edirMode truyền vào
+        /// Thêm, xóa, sửa theo editMode truyền vào
         /// </summary>
         /// <param name="entities">Đối tượng cần thao tác</param>
         /// <returns>Số bản ghi bị ảnh hưởng</returns>

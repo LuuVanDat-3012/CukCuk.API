@@ -222,7 +222,7 @@ namespace MISA.ApplicationCore.Service
                             fieldNotValids.Add(new FieldNotValid()
                             {
                                 fieldName = propertyName,
-                                msg = message + " không vượt quá " + maxLength + " ký tự !!!"
+                                msg = message
                             });
                         }
                 }
@@ -363,13 +363,15 @@ namespace MISA.ApplicationCore.Service
                     var result = this.DeleteEntity(id);
                     affectedRows += (int)result.Data;
                 }
+                // Xóa đủ ssoos lượng truyền lên thì thành công
+                // Trái lại rollback
                 if (affectedRows == listId.Length)
                 {
                     transaction.Complete();
                     return new ActionServiceResult()
                     {
                         Success = true,
-                        Message = "Xoá thành công !!!",
+                        Message = ApplicationCore.Properties.Resources.deleteSuccess,
                         MISAcode = Enumeration.MISAcode.Success,
                         Data = affectedRows
                     };
@@ -379,9 +381,9 @@ namespace MISA.ApplicationCore.Service
                     transaction.Dispose();
                     return new ActionServiceResult()
                     {
-                        Success = true,
-                        Message = "Xóa không thành công !!!",
-                        MISAcode = Enumeration.MISAcode.Success,
+                        Success = false,
+                        Message = ApplicationCore.Properties.Resources.deleteNotSuccess,
+                        MISAcode = Enumeration.MISAcode.Exception,
                         Data = 0
                     };
                 }
